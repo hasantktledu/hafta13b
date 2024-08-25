@@ -10,6 +10,7 @@ function C3() {
             Appte yer alan adet değeri: {a.adetState.adet}
 
             <button onClick={()=>{ a.adetState.adetGuncelle(25) }}>Değiştir</button>
+            <button onClick={  ()=> {  a.girisYapildiGuncelle( eskiDeger=>!eskiDeger )    }  }>Giriş Değiştir</button>
         </>
     )
 }

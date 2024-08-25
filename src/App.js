@@ -7,7 +7,7 @@ function App() {
   const [adet, adetGuncelle] = useState(0)
   const [girisYapildi, girisYapildiGuncelle] = useState(false)
 
-  const veri = {  adetState: {adet, adetGuncelle}, girisYapildi  } 
+  const veri = {  adetState: {adet, adetGuncelle}, girisYapildi, girisYapildiGuncelle  } 
 
   return (
     <GlobalHavuz.Provider value={veri}>
