@@ -1,22 +1,30 @@
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
 
 function App() {
+  const [adet, adetGuncelle] = useState(0)
+
+
+  const paragrafRef = useRef()
+  const sayacRef = useRef(20)
+
+  useEffect(()=>{
+    paragrafRef.current.style.color = "red"
+  }, [])
+
+  function arttir() {
+    // adetGuncelle( mevcutDeger=>mevcutDeger + 5 )
+    // alert(sayacRef.current)
+    sayacRef.current = sayacRef.current + 5
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p ref={paragrafRef}>Test</p>
+
+      <button onClick={arttir}>Arttır</button>
+      <p>sayacRef: {sayacRef.current}</p>
+      <p>adet: {adet}</p>
     </div>
   );
 }
