@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import './App.css';
 import C1 from './C1';
 
@@ -9,6 +9,12 @@ function App() {
 
   console.log("App komponenti render oldu")
 
+  const hesapla = useCallback( ()=> {
+    alert("Appteki hesapla fonksiyonu çalıştı! Sayı:"+sayi)
+    return 32565
+  }, [sayi] )
+
+
   return (
     <>
       <p>
@@ -16,7 +22,8 @@ function App() {
       </p>
       <button onClick={ ()=>sayiGuncelle(eskiDeger=>eskiDeger+5) }>Sayı arttır {sayi}</button>
       <button onClick={ ()=>sayi2Guncelle(eskiDeger=>eskiDeger+10) }>Sayı2 arttır {sayi2}</button>
-      <C1 isim={isim} sayi={sayi} />
+
+      <C1 hesapla={hesapla} />
     </>
   );
 }
