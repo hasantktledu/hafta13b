@@ -1,24 +1,23 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import C1 from './C1';
 
 function App() {
+  const [sayi, sayiGuncelle] = useState(0)
+  const [sayi2, sayi2Guncelle] = useState(0)
+  const [isim, isimGuncelle] = useState("Kaan")
+
+  console.log("App komponenti render oldu")
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <p>
+        App
+      </p>
+      <button onClick={ ()=>sayiGuncelle(eskiDeger=>eskiDeger+5) }>Sayı arttır {sayi}</button>
+      <button onClick={ ()=>sayi2Guncelle(eskiDeger=>eskiDeger+10) }>Sayı2 arttır {sayi2}</button>
+      <C1 isim={isim} sayi={sayi} />
+    </>
   );
 }
 
