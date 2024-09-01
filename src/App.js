@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import { useMemo } from 'react';
 
 function App() {
+  const [sayi, sayiArttir] = useState(0)
+  const [sayi2, sayiArttir2] = useState(0)
+
+  function hesaplamaYap(sayi){
+    console.log("Hesaplama fonksiyonu çalıştı..")
+
+    return 658745+sayi
+  }
+
+  const deger = useMemo(  ()=> hesaplamaYap(sayi2), [sayi2]  )
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <p>{deger}</p>
+
+      <button onClick={ ()=>{ sayiArttir(eskiDeger=>eskiDeger+5) } }> Arttır {sayi}</button>
+      <button onClick={ ()=>{ sayiArttir2(eskiDeger=>eskiDeger+10) } }> Arttır 2 {sayi2}</button>
+    </>
   );
 }
 
