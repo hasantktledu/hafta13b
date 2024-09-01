@@ -1,51 +1,16 @@
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import './App.css';
-import  {v4 as uuid} from 'uuid'
 
-const yapilacaklar = [
-  {
-    id: 12,
-    baslik: "Yumurta alınacak",
-    tamamlandi: false
-  },
-  {
-    id: 156,
-    baslik: "Süt alınacak",
-    tamamlandi: true
-  }
-]
+import { yapilacaklar, islerReducer } from './reducer/islerReducer';
+import IsListe from './IsListe';
 
 function App() {
-  const [isler, islerGuncelle] = useState(yapilacaklar)
+  // const [isler, islerGuncelle] = useState(yapilacaklar)
   const [inputBaslik, inputBaslikGuncelle] = useState("")
-
-  function tamamlamaIslemi(tiklananEleman) {
-    islerGuncelle(  eskiDeger=> {
-        return eskiDeger.map( eskiEleman=>{
-          if ( eskiEleman.id === tiklananEleman.id ) {
-            return {...eskiEleman, tamamlandi: !eskiEleman.tamamlandi}
-          } else{
-            return eskiEleman
-          }
-        } )
-      }
-     )
-  }
+  const [isler, vekilFonksiyon] = useReducer( islerReducer, yapilacaklar  )
 
   function yeniIsInput(olay) {
     inputBaslikGuncelle(olay.target.value)
-  }
-
-  function yeniIsEkle(){
-
-    const yeniIs = {
-      id: uuid(),
-      baslik: inputBaslik,
-      tamamlandi: false
-    }
-
-    islerGuncelle( eskiDeger=>[...eskiDeger, yeniIs] )
-    inputBaslikGuncelle("")
   }
 
   return (
@@ -54,19 +19,10 @@ function App() {
 
       <div>
         <input value={inputBaslik} onChange={yeniIsInput} type='text' placeholder='Yeni iş başlığı girin' /> 
-        <button onClick={yeniIsEkle}>+ Ekle</button>
+        <button onClick={ ()=> vekilFonksiyon( {type: "YENİİŞ", baslik: inputBaslik} ) }>+ Ekle</button>
       </div>
 
-      {isler.map((eleman)=>{
-        return (
-          <div key={eleman.id}>
-            <label>
-              <input type='checkbox' checked={eleman.tamamlandi} onChange={ ()=>tamamlamaIslemi(eleman) } />
-              {eleman.baslik}
-            </label>
-          </div>
-        )
-      })}
+      <IsListe isler={isler} vekilFonksiyon={vekilFonksiyon} />
     </>
   );
 }
